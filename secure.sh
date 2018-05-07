@@ -24,9 +24,7 @@ group=$(<${file})
 echo ${group}
 
 if [ ! -z ${group} ]; then
-    # groupid="sg-0ac3ffcdad6079573"
     address=$(curl v4.ifconfig.co | awk '{ print $0 "/32" }')
-    # export stuff=$(cat ipnew.txt)
     echo  "${address} "
     aws ec2 authorize-security-group-ingress --group-id "${group}"  --protocol tcp --port 22 --cidr ${address}
 else
